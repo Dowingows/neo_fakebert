@@ -1,5 +1,6 @@
 
 import os 
+import pandas as pd
 import utils as ut
 import dataset as dt
 import models as md
@@ -7,7 +8,7 @@ import numpy as np
 from tqdm import tqdm
 import  sklearn.metrics as  m
 
-result_path = '../results/default-small_bert_bert_en_uncased_L_12_H_512_A_8-default_bert_mlp-2022.01.11 - 18.46.34'
+result_path = '../results/default-small_bert_bert_en_uncased_L_12_H_512_A_8-default_bert_mlp-2022.01.11 - 20.08.05'
 
 def predict(model, test_ds):
 
@@ -54,5 +55,8 @@ if __name__ == '__main__':
     for key, val in metrics.items():
         print('{}: {:.4f}'.format(key, val))
 
-
     
+    keys = metrics.keys()
+    df = pd.DataFrame(columns=keys)
+    df = df.append(metrics, ignore_index=True)
+    df.to_csv(os.path.join(result_path, 'metrics.csv'), sep=';', decimal=',', index=False)
