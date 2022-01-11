@@ -53,6 +53,8 @@ if __name__ == '__main__':
     auc = m.auc(fpr, tpr)
     metrics['auc'] = auc
 
+    ut.save_roc_curve(os.path.join(result_path, 'roc_curve.png'), fpr, tpr, auc)
+
     acc = m.accuracy_score(y_true, y_pred_bin)
     metrics['acc'] = acc
 

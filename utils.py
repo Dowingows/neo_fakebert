@@ -52,3 +52,15 @@ def save_training_graph(out_dir, history, variable):
     plt.cla()
     plt.clf()
     plt.close('all')
+
+def save_roc_curve(out_dir, fpr, tpr, auc)   :
+
+    plt.title('Curva ROC')
+    plt.plot(fpr, tpr, 'b', label = 'AUC = %0.2f' % auc)
+    plt.legend(loc = 'lower right')
+    plt.plot([0, 1], [0, 1],'r--')
+    plt.xlim([0, 1])
+    plt.ylim([0, 1])
+    plt.ylabel('Taxa de verdadeiros positivos')
+    plt.xlabel('Taxa de falsos positivos')
+    plt.savefig(out_dir)
