@@ -9,9 +9,9 @@ def create_nested_dir(path):
     except:
         pass    
 
-def get_env_params():
+def get_env_params(pathname = r'./config/env.yaml'):
     params = {}
-    with open(r'./config/env.yaml') as file:
+    with open(pathname) as file:
         params = yaml.load(file, Loader=yaml.FullLoader)
     return params
 
