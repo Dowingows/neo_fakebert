@@ -33,10 +33,8 @@ def gen_outdirname_by_env():
     return sanitize(params['tag']) +'-'+ sanitize(params['bert_model_name']) + "-" + sanitize(params['mlp_model_name']) + "-" +  time.strftime("%Y.%m.%d - %H.%M.%S")
 
 def save_train_status(out_dir, model, history):
-    out_dir = os.path.join(out_dir, gen_outdirname_by_env())
-    create_nested_dir(out_dir)
     save_env_in_results(out_dir)
-    model.save_weights(os.path.join(out_dir, 'weights.h5'))
+    model.save_weights(os.path.join(out_dir, 'train_weights_final.h5'))
     save_graphs(out_dir, history)
 
 def save_training_graph(out_dir, history, variable):
