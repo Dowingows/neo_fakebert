@@ -35,7 +35,7 @@ def run(bert_model_name, mlp_model_name, train_params):
     history = model.fit(x=train_ds,
                                 validation_data=val_ds,
                                 epochs=epochs)
-
+                                
     ut.save_train_status(train_params['out_dir'], model, history.history)
 
 if __name__ == '__main__':

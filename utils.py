@@ -2,6 +2,7 @@ import os
 import yaml
 import time
 import matplotlib.pyplot as plt
+import shutil
 
 def create_nested_dir(path):
     try:
@@ -14,6 +15,9 @@ def get_env_params(pathname = r'./config/env.yaml'):
     with open(pathname) as file:
         params = yaml.load(file, Loader=yaml.FullLoader)
     return params
+
+def save_env_in_results(out_dir):
+    shutil.copy(r'./config/env.yaml', os.path.join(out_dir,'env.yaml'))
 
 def save_graphs(out_dir, history):
     for key in history:
@@ -31,6 +35,7 @@ def gen_outdirname_by_env():
 def save_train_status(out_dir, model, history):
     out_dir = os.path.join(out_dir, gen_outdirname_by_env())
     create_nested_dir(out_dir)
+    save_env_in_results(out_dir)
     model.save_weights(os.path.join(out_dir, 'weights.h5'))
     save_graphs(out_dir, history)
 
