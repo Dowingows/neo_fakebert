@@ -160,6 +160,28 @@ def get_default_bert_mlp(encoder_out):
   net = tf.keras.layers.Dense(1, activation='sigmoid', name='classifier')(net)
   return net
 
+def get_conv_1_bert_mlp(encoder_out):
+  net = encoder_out['pooled_output']
+  net = tf.keras.layers.Reshape((1, 32,16))(net)
+  net = tf.keras.layers.Conv1D(filters=128, kernel_size=5, padding='same', activation='relu',
+                         input_shape=(net.shape[1], 1))(net)
+  net = tf.keras.layers.Flatten()(net)
+  net = tf.keras.layers.Dropout(0.1)(net)
+  net = tf.keras.layers.Dense(1, activation='sigmoid', name='classifier')(net)
+  return net
+
+def get_conv_1_dense_2_bert_mlp(encoder_out):
+  net = encoder_out['pooled_output']
+  net = tf.keras.layers.Reshape((1, 32,16))(net)
+  net = tf.keras.layers.Conv1D(filters=128, kernel_size=5, padding='same', activation='relu',
+                         input_shape=(net.shape[1], 1))(net)
+  net = tf.keras.layers.Flatten()(net)
+  net = tf.keras.layers.Dense(128, activation='sigmoid')(net)
+  net = tf.keras.layers.Dropout(0.1)(net)
+  net = tf.keras.layers.Dense(1, activation='sigmoid', name='classifier')(net)
+  return net
+
+
 def build_bert_model(bert_model_name, mlp_model_name):
     text_input = tf.keras.layers.Input(shape=(), dtype=tf.string, name='text')
     encoder_out = get_bert_encoder(text_input, bert_model_name)
