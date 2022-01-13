@@ -9,7 +9,7 @@ from tqdm import tqdm
 import  sklearn.metrics as  m
 import sys
 
-result_path = '../results/default-small_bert_bert_en_uncased_L_12_H_512_A_8-default_bert_mlp-2022.01.12 - 09.48.00'
+result_path = '../results/default-bert_prt_small-default_bert_mlp-2022.01.13 - 10.55.26'
 
 if len(sys.argv) == 2:
     result_path = sys.argv[1]

@@ -36,7 +36,7 @@ def run(bert_model_name, mlp_model_name, train_params):
             save_best_only=True, verbose=1, 
             save_weights_only=True, monitor='val_loss', mode='min')
     
-    earlyStopping = tf.keras.callbacks.EarlyStopping(monitor='val_loss', patience=7, verbose=1, mode='min')
+    earlyStopping = tf.keras.callbacks.EarlyStopping(monitor='val_loss', patience=5, verbose=1, mode='min')
 
     history = model.fit(x=train_ds,
                                 validation_data=val_ds,
